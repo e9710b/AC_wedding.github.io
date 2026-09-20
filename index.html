@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Allen & Betty | 2026.05.24</title>
+    <!-- Open Graph (LINE 預覽縮圖用) -->
+  <meta property="og:title" content="崇華 & 舒婷｜婚禮邀請函 2026.05.24" />
+  <meta property="og:description" content="誠摯邀請您蒞臨見證我們的幸福。時間：2026/05/24 12:00｜地點：晶宴會館-桃園館" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ing12339.github.io/AllenBettyWedding.github.io/#" />
+  <meta property="og:image" content="https://raw.githubusercontent.com/ing12339/AllenBettyWedding.github.io/refs/heads/main/assets/img/DSC_1811.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Optional: Twitter（有些平台也會用到） -->
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- 引入高質感字體 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Noto+Serif+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #fcfbf9;      
+      --text-color: #4a4a4a;
+      --accent-color: #a38f76;  
+      --red-accent: #ba2f2f;    
+      --font-en: 'Cormorant Garamond', serif;
+      --font-zh: 'Noto Serif TC', serif;
+      
+      /* 信封配色 */
+      --env-bg: #f7f5f0;        /* 珍珠米白 */
+      --env-shadow: rgba(163, 143, 118, 0.15);
+      --gold-seal: #d4af37;     /* 金色 */
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-zh);
+      line-height: 1.8;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* ✅ 自動捲動時關掉 smooth，避免手機不動 */
+    html.autoscroll-off-smooth {
+      scroll-behavior: auto !important;
+    }
+    
+    h1, h2, h3 { font-family: var(--font-en); margin: 0; font-weight: 400; }
+    img { display: block; width: 100%; height: auto; object-fit: cover; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+    .text-center { text-align: center; }
+    .fade-up { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* === [信封設計] 線條加強版 === */
+    #envelope-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #f0ebe5; /* 柔和背景 */
+      display: flex; flex-direction: column; 
+      align-items: center; justify-content: center;
+      transition: opacity 1.2s ease, visibility 1.2s;
+    }
+    #envelope-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    /* 指引文字 */
+    .click-hint {
+      margin-bottom: 40px;
+      text-align: center;
+      animation: floatHint 2s infinite ease-in-out;
+      z-index: 100;
+    }
+    .click-hint h3 {
+      font-family: var(--font-zh);
+      font-size: 1.2rem;
+      letter-spacing: 3px;
+      color: #666;
+      margin-bottom: 5px;
+      font-weight: 400;
+    }
+    .click-hint span {
+      font-family: var(--font-en);
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      color: #999;
+      text-transform: uppercase;
+    }
+
+    /* 信封容器 */
+    .modern-env {
+      position: relative;
+      width: 320px; height: 220px;
+      cursor: pointer;
+      perspective: 1000px;
+    }
+
+    /* 信封本體 (背面) */
+    .env-back {
+      position: absolute; bottom: 0; width: 100%; height: 100%;
+      background: #fff;
+      border-radius: 8px;
+      /* 加深陰影，讓信封本體浮起來 */
+      box-shadow: 0 25px 50px -10px rgba(0,0,0,0.2); 
+      border: 1px solid #e0e0e0;
+    }
+
+    /* 內卡 (預覽) */
+    .env-card {
+      position: absolute;
+      left: 10px; right: 10px; bottom: 10px; height: 85%;
+      background: #faf9f6;
+      border: 1px solid #ddd;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+      padding-top: 30px;
+      z-index: 5;
+      transition: transform 0.8s ease 0.4s;
+    }
+    .env-card-text { font-family: var(--font-en); font-size: 1.8rem; color: #333; }
+    
+    /* 信封口袋 (前面) */
+    .env-front {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+      background: var(--env-bg);
+      clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 100%, 0 100%);
+      z-index: 10;
+      border-radius: 0 0 8px 8px;
+      background: linear-gradient(135deg, #fdfbf7 0%, #f2f0e6 100%);
+      /* [修改] 加上 Drop Shadow 讓口袋邊緣清楚 */
+      filter: drop-shadow(0 -1px 1px rgba(0,0,0,0.1));
+    }
+
+    /* 信封蓋 (可翻轉) */
+    .env-flap {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to bottom, #fdfbf7, #ebe8e0);
+      clip-path: polygon(0 0, 100% 0, 50% 60%);
+      transform-origin: top;
+      transition: transform 0.6s ease-in-out, z-index 0.6s;
+      z-index: 20;
+      border-radius: 8px 8px 0 0;
+      
+      /* [修改] 關鍵：這裡加強了陰影，模擬邊框線條 */
+      filter: drop-shadow(0 0 1px rgba(0,0,0,0.3)) drop-shadow(0 5px 10px rgba(0,0,0,0.15));
+    }
+    /* 蓋子上緣加一條實線，避免頂部看不清楚 */
+    .env-flap::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: rgba(0,0,0,0.1);
+    }
+
+    /* 金色封蠟 */
+    .gold-seal {
+      position: absolute; top: 58%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 46px; height: 46px;
+      background: radial-gradient(circle at 30% 30%, #ebd39c, #cfa578);
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(163, 143, 118, 0.4);
+      z-index: 30;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-family: var(--font-en); font-weight: 600; font-size: 12px; letter-spacing: 1px;
+      transition: opacity 0.4s;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+    .gold-seal::after {
+      content: ''; position: absolute; inset: 3px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%;
+    }
+
+    /* 開啟動畫狀態 */
+    .modern-env.open .env-flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+    .modern-env.open .gold-seal {
+      opacity: 0; pointer-events: none;
+    }
+    .modern-env.open .env-card {
+      transform: translateY(-120px);
+      z-index: 15;
+    }
+    .modern-env:hover .gold-seal { transform: translate(-50%, -50%) scale(1.1); transition: 0.3s; }
+
+    @keyframes floatHint { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-5px);} }
+
+
+    /* === 2. Hero 主視覺 === */
+    .hero {
+      position: relative; height: 100vh; width: 100%;
+      display: flex; align-items: center; justify-content: center; overflow: hidden; color: #F5F2ED;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('assets/img/DSC_1811.webp');
+      background-size: cover; background-position: center;
+      filter: brightness(1); transform: scale(1.1); transition: transform 10s ease; z-index: 0;
+    }
+    .hero.active .hero-bg { transform: scale(1); }
+    .hero-content {
+      position: relative; z-index: 2; text-align: center; opacity: 0;
+      transform: translateY(30px); transition: opacity 1.5s ease, transform 1.5s ease;
+    }
+    
+    .hero.active .hero-content { opacity: 1; transform: translateY(0); }
+    .hero-title { transform: translateY(90px); font-size: clamp(3.5rem, 8vw, 6rem); font-family: var(--font-en); line-height: 1.1; margin-bottom: 20px; text-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+    .hero-subtitle {
+      transform: translateY(90px);
+      font-family: var(--font-en);
+      font-style: italic;
+      font-size: 3.1rem;
+      letter-spacing: 0.2em;
+      margin-top: 12px;
+      margin-bottom: 22px;
+      opacity: 0.85;
+    }
+    .hero-subtitle::before {
+      content: "";
+      position: absolute;
+      inset: -40px -80px; /* 包住文字但留呼吸感 */
+      background: rgba(0, 0, 0, 0.25);
+      filter: blur(30px);
+      z-index: -1;
+    }
+    .hero-date-line {transform: translateY(90px); font-size: 1.2rem; letter-spacing: 0.3em; font-family: var(--font-en); text-transform: uppercase; border-top: 1px solid rgba(255,255,255,0.7); padding-top: 20px; display: inline-block; margin-top: 10px; }
+    .hero-date-line::before {
+      content: "";
+      position: absolute;
+      inset: -40px -80px; /* 包住文字但留呼吸感 */
+      background: rgba(0, 0, 0, 0.25);
+      filter: blur(30px);
+      z-index: -1;
+    }
+    /* === 3. Intro Section === */
+    .intro-section { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 80px 0; }
+    
+    .intro-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; width: 100%; }
+    
+    @media(max-width: 900px) { 
+      .intro-grid { grid-template-columns: 1fr; gap: 40px; } 
+      .intro-section { padding-top: 80px; align-items: flex-start; }
+      .intro-text-col { text-align: center; order: 1; }
+      .intro-img-wrap { order: 2; }
+    }
+    
+    .intro-img-wrap { position: relative; border-radius: 4px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    .intro-text-col { padding: 20px; }
+    .intro-title { font-size: 1.6rem; font-style: italic; margin-bottom: 30px; font-family: var(--font-zh); font-weight: 600; }
+    .intro-body { font-size: 1.05rem; line-height: 2.4; color: #555; margin-bottom: 40px; }
+    .countdown-divider { width: 60px; height: 1px; background: var(--red-accent); margin: 30px 0; }
+    @media(max-width: 900px) { .countdown-divider { margin: 30px auto; } }
+
+    .countdown-wrap { display: flex; gap: 30px; margin-bottom: 20px; }
+    @media(max-width: 900px) { .countdown-wrap { justify-content: center; } }
+    .cd-item { text-align: center; font-family: var(--font-en); }
+    .cd-number { font-size: 2.5rem; line-height: 1; color: #333; font-weight: 500; }
+    .cd-label { font-size: 0.7rem; letter-spacing: 2px; color: #999; text-transform: uppercase; margin-top: 5px; }
+
+    /* [NEW] Add to Calendar Button Style */
+    .calendar-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background-color: transparent;
+      border: 1px solid var(--accent-color);
+      color: var(--accent-color);
+      font-family: var(--font-en);
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      border-radius: 50px;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 15px;
+    }
+    .calendar-btn:hover {
+      background-color: var(--accent-color);
+      color: #fff;
+    }
+    .calendar-btn svg { width: 16px; height: 16px; }
+
+    /* === 4. Story Section === */
+    .story-section { padding: 80px 0; }
+    .story-row { display: flex; align-items: center; gap: 60px; margin-bottom: 100px; }
+    .story-row.reverse { flex-direction: row-reverse; } 
+    .story-img-col { flex: 1; }
+    .story-img-col img { width: 100%; border-radius: 4px; box-shadow: 0 15px 30px rgba(0,0,0,0.05); transition: transform 0.6s ease; }
+    .story-img-col:hover img { transform: scale(1.02); }
+    .story-text-col { flex: 1; padding: 0 20px; }
+    .story-text-col h3 { font-family: var(--font-en); font-size: 2.5rem; color: var(--accent-color); margin-bottom: 20px; }
+    .story-text-col p { font-size: 1rem; color: #666; margin-bottom: 20px; text-align: justify; }
+    @media(max-width: 768px) {
+    .story-row, .story-row.reverse { 
+      flex-direction: column; 
+      gap: 40px; 
+      margin-bottom: 80px; 
+    }
+
+    /* ✅ 讓手機版 Story 永遠是：文字在上、照片在下 */
+    .story-row .story-text-col,
+    .story-row.reverse .story-text-col { order: 1; }
+
+    .story-row .story-img-col,
+    .story-row.reverse .story-img-col { order: 2; }
+
+    .story-text-col { text-align: center; padding: 0; }
+    .story-text-col p { text-align: center; }
+  }
+
+
+    /* === 5. Timeline Section === */
+    .timeline-section { padding: 40px 0 100px 0; }
+    .section-title-center { text-align: center; font-family: var(--font-en); font-size: 2.5rem; color: var(--text-color); margin-bottom: 60px; }
+    
+    .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+    .timeline::after { content: ''; position: absolute; width: 1px; background-color: var(--accent-color); top: 0; bottom: 0; left: 50%; margin-left: -0.5px; opacity: 0.3; }
+    .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; }
+    .timeline-item.left { left: 0; text-align: right; }
+    .timeline-item.right { left: 50%; text-align: left; }
+    .timeline-item::after { content: ''; position: absolute; width: 12px; height: 12px; right: -6px; background-color: #fff; border: 2px solid var(--accent-color); top: 20px; border-radius: 50%; z-index: 1; }
+    .timeline-item.right::after { left: -6px; }
+    .timeline-content h4 { font-family: var(--font-en); font-size: 1.8rem; margin: 0; color: var(--accent-color); line-height: 1; }
+    .timeline-content h5 { font-family: var(--font-zh); font-size: 1.1rem; margin: 5px 0 10px 0; font-weight: 600; color: #333; }
+    .timeline-content p { font-size: 0.95rem; color: #777; margin: 0; }
+    @media (max-width: 600px) {
+      .timeline::after { left: 20px; }
+      .timeline-item { width: 100%; padding-left: 50px; padding-right: 25px; text-align: left; }
+      .timeline-item.left { text-align: left; }
+      .timeline-item.right { left: 0%; }
+      .timeline-item::after { left: 14px; }
+      .timeline-item.right::after { left: 14px; }
+    }
+
+    /* === 6. Parallax Quote === */
+    .parallax-quote {
+      position: relative; height: 400px;
+      background-image: url('https://images.unsplash.com/photo-1522673607200-1645062cd958?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover; background-attachment: fixed; background-position: center;
+      display: flex; align-items: center; justify-content: center; color: #fff;
+    }
+    .parallax-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); }
+    .quote-content { position: relative; z-index: 2; text-align: center; max-width: 700px; padding: 20px; }
+    .quote-text { font-family: var(--font-en); font-size: 2rem; font-style: italic; line-height: 1.6; white-space: nowrap;}
+    @media (max-width: 768px) {
+      .quote-text {
+        white-space: normal;   /* 📱 手機恢復自動換行 */
+      }
+    }
+    
+    /* === 7. Moments Gallery === */
+    .moments-section { padding: 100px 0; }
+    .moments-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .moment-item { overflow: hidden; border-radius: 4px; }
+    .moment-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; aspect-ratio: 2/3; }
+    .moment-item:hover img { transform: scale(1.1); }
+    @media(max-width: 768px) { .moments-grid { grid-template-columns: 1fr; } }
+
+
+    /* === 8. 日曆與資訊 (粗體 + 跳動愛心) === */
+    .details-section { text-align: center; padding: 100px 0; background: #faf9f6; }
+    .double-happiness { font-size: 4rem; color: var(--red-accent); font-weight: bold; margin-bottom: 20px; font-family: "Microsoft JhengHei", sans-serif; }
+    .date-large { font-size: 1.5rem; letter-spacing: 2px; margin-bottom: 10px; }
+    .lunar-date { font-size: 1rem; color: #666; margin-bottom: 10px; } /* 減少底部 margin */
+
+    .calendar-wrapper { max-width: 450px; margin: 0 auto; border-top: 1px solid #ddd; padding-top: 30px; margin-bottom: 60px; }
+    .cal-header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 20px; justify-content: center;}
+    .cal-month { font-size: 3rem; color: var(--red-accent); font-family: var(--font-en); line-height: 1; font-weight: bold; }
+    .cal-year { font-size: 1.2rem; color: var(--red-accent); font-family: var(--font-en); font-weight: bold;}
+    
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center; }
+    
+    /* 粗體設定 */
+    .cal-head { color: #222; font-size: 1rem; margin-bottom: 10px; font-family: var(--font-en); font-weight: 700; }
+    .cal-day { 
+      aspect-ratio: 1; display: flex; align-items: center; justify-content: center; 
+      font-family: var(--font-en); font-size: 1.2rem; color: #333; font-weight: 700; 
+    }
+    
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      15% { transform: scale(1.15); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.15); }
+      60% { transform: scale(1); }
+      100% { transform: scale(1); }
+    }
+
+    .cal-day.heart { position: relative; color: #fff !important; font-weight: bold; z-index: 1; text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+    .cal-day.heart::before {
+      content: '❤'; 
+      position: absolute; inset: 0; 
+      display: flex; align-items: center; justify-content: center; 
+      color: #d63031; 
+      font-size: 2.4rem; 
+      opacity: 1; 
+      z-index: -1;
+      padding-bottom: 4px;
+      animation: heartbeat 1.3s infinite ease-in-out; 
+    }
+
+    /* === 9. 地圖 & 交通 === */
+    .map-section { padding-bottom: 80px; padding-top: 80px; }
+    .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px; text-align: left; }
+    @media(max-width: 768px) { .location-grid { grid-template-columns: 1fr; gap: 30px; } }
+
+    .loc-title { font-family: var(--font-zh); font-size: 1.4rem; color: var(--red-accent); margin-bottom: 15px; font-weight: 700; letter-spacing: 1px; }
+    .loc-name { font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; color: #333; }
+    .loc-detail, .loc-addr { color: #666; margin-bottom: 5px; font-size: 1rem; }
+    .transport-list { list-style: none; padding: 0; margin: 0; }
+    .transport-list li { margin-bottom: 12px; color: #555; padding-left: 0; line-height: 1.6; }
+    .transport-list strong { color: #333; font-weight: 700; margin-right: 5px; }
+
+    .map-wrap { 
+      width: 100%;
+      max-width: 1400px;     /* ✅ 左右縮小的關鍵 */
+      margin: 0 auto;       /* ✅ 水平置中 */
+      height: 560px;
+      background: #eee; 
+      filter: grayscale(0%); 
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border-radius: 4px; 
+      overflow: hidden;
+    }
+    @media(max-width: 768px) {
+      .map-wrap {
+        max-width: 100%;
+        height: 260px;
+      }
+    }
+    .map-wrap iframe { width: 100%; height: 100%; border: 0; }
+
+    /* === 控制項 === */
+    .controls { position: fixed; bottom: 30px; right: 30px; z-index: 100; display: flex; flex-direction: column; gap: 15px; align-items: center; }
+    .music-disc { width: 50px; height: 50px; background: #222; border-radius: 50%; border: 2px solid var(--accent-color); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    .music-disc svg { width: 20px; color: #fff; }
+    .music-disc.playing { animation: spin 4s linear infinite; }
+    .music-disc.paused { animation: none; opacity: 0.7; }
+    .scroll-btn { font-size: 10px; font-family: var(--font-en); letter-spacing: 1px; color: #333; background: rgba(255,255,255,0.8); padding: 4px 8px; border-radius: 4px; cursor: pointer; text-transform: uppercase; border: 1px solid #ccc; }
+    .scroll-btn.active { background: var(--accent-color); color: #fff; border-color: transparent; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    footer { text-align: center; padding: 40px; background: #333; color: #888; font-size: 0.8rem; }
+  
+    /* === [NEW] 自訂彈窗樣式 (取代醜醜的 alert) === */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 99999;
+      background: rgba(0,0,0,0.6);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+      padding: 20px;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    
+    .modal-box {
+      background: #fff;
+      max-width: 400px; width: 100%;
+      padding: 30px 25px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transform: translateY(20px); transition: transform 0.3s;
+      border-top: 4px solid var(--red-accent); /* 配合您的紅色系 */
+    }
+    .modal-overlay.active .modal-box { transform: translateY(0); }
+    
+    .modal-title { font-family: var(--font-zh); font-size: 1.25rem; font-weight: 700; color: #333; margin-bottom: 15px; }
+    .modal-text { font-size: 1rem; color: #666; line-height: 1.6; margin-bottom: 25px; text-align: left; }
+    .modal-text ul { padding-left: 20px; margin: 10px 0; }
+    .modal-text li { margin-bottom: 5px; }
+    
+    .modal-btn {
+      background: var(--accent-color); color: #fff;
+      border: none; padding: 10px 30px;
+      font-size: 1rem; border-radius: 50px;
+      cursor: pointer; transition: 0.3s;
+      font-family: var(--font-zh);
+    }
+    .modal-btn:hover { background: #8e7c65; }
+  </style>
+</head>
+<body>
+
+  <!-- 信封 (Modern + High Contrast Shadow) -->
+  <div id="envelope-overlay">
+    <div class="click-hint">
+      <h3>點擊信封開啟邀請函</h3>
+      <span>Click to open the invitation</span>
+    </div>
+
+    <div class="modern-env" onclick="openEnvelope()">
+      <div class="env-back"></div>
+      <div class="env-card">
+        <div class="env-card-text">崇華 ❤️ 舒婷</div>
+        <div style="font-size:1.5rem; letter-spacing:2px; color:#888; margin-top:5px;">我們要結婚啦</div>
+      </div>
+      <div class="env-front"></div>
+      <div class="env-flap"></div>
+      <div class="gold-seal">OPEN</div>
+    </div>
+  </div>
+
+  <audio id="bg-music" loop>
+    <!-- 請確認您的音樂路徑是否正確 -->
+    <source src="assets/Jake Miller - Lucky Me (The proposal).mp3" type="audio/mp3">
+  </audio>
+
+  <div class="controls">
+    <div class="scroll-btn" id="scroll-toggle" onclick="toggleAutoScrollManually()">Auto Scroll</div>
+    <div class="music-disc paused" id="music-toggle" onclick="toggleMusic()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">崇華 & 舒婷</h1>
+      <div class="hero-subtitle">Our Wedding</div>
+      <div class="hero-date-line">MAY 24, 2026</div>
+    </div>
+  </header>
+
+  <!-- Intro -->
+  <section class="container intro-section fade-up" id="intro">
+    <div class="intro-grid">
+      <div class="intro-text-col">
+        <div class="intro-title">「給我們摯愛的親友們」</div>
+        <div class="intro-body">
+          當這封邀請函來到你手中<br>
+          代表我們最珍惜的人<br>
+          正準備與我們一同迎接人生的重要時刻<br>
+          我們正一天天倒數<br>
+          滿懷期待與你相見<br>
+          在那屬於我們的特別日子裡<br>
+          誠摯邀請你蒞臨<br>
+          一同見證我們的幸福
+        </div>
+        <div class="countdown-divider"></div>
+        <div class="countdown-wrap">
+          <div class="cd-item"><div class="cd-number" id="cd-days">0</div><div class="cd-label">DAYS</div></div>
+          <div class="cd-item"><div class="cd-number">:</div></div>
+          <div class="cd-item"><div class="cd-number" id="cd-hours">0</div><div class="cd-label">HOURS</div></div>
+          <div class="cd-item"><div class="cd-number">:</div></div>
+          <div class="cd-item"><div class="cd-number" id="cd-mins">0</div><div class="cd-label">MINS</div></div>
+          <div class="cd-item"><div class="cd-number">:</div></div>
+          <div class="cd-item"><div class="cd-number" id="cd-secs">0</div><div class="cd-label">SECS</div></div>
+        </div>
+        
+        <!-- [Added here per your previous prompt, though requested to be near date details] 
+             I'll remove it from here if you only want it in the details section. 
+             For now, I'll put it in the details section as per your latest request. -->
+      </div>
+      <div class="intro-img-wrap">
+        <img src="assets/img/DSC_1763.webp" alt="Wedding Couple">
+      </div>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="container story-section">
+    <div class="story-row fade-up">
+      <div class="story-img-col">
+        <img src="assets/img/DSC_1680.webp" alt="Meeting">
+      </div>
+      <div class="story-text-col">
+        <h3>The Beginning</h3>
+        <p>那是一個陽光普照的午後，我們在網球場上相遇。</p>
+        <p>網球在空中劃出的弧線，伴隨著迎面而來的微風，編織成了我們故事的序章。</p>
+        <p>從那刻起，生活中的大小事因為有你分享而變得不平凡。</p>
+        <p>我們一起走過了四季，也更加確定，未來的每一步都想與你同行。</p>
+      </div>
+    </div>
+    <div class="story-row reverse fade-up">
+      <div class="story-img-col">
+        <img src="assets/img/DSC_1860.webp" alt="YES">
+      </div>
+      <div class="story-text-col">
+        <h3>The Yes</h3>
+        <p>在富良野的花海下，我們在彼此的目光裡，說出了那個等待已久的答案。</p>
+        <p>你的笑容與眼淚，是我這輩子見過最美的畫面。</p>
+        <p>決定牽手的這一刻，我們許下了承諾。未來的路，無論風雨或天晴，我們都將並肩同行。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="container timeline-section fade-up">
+    <h2 class="section-title-center">Our Journey</h2>
+    <div class="timeline">
+      <div class="timeline-item left">
+        <div class="timeline-content">
+          <h4>2017</h4>
+          <h5>初次相遇</h5>
+          <p>在網球場上，命運讓我們相識。</p>
+        </div>
+      </div>
+      <div class="timeline-item right">
+        <div class="timeline-content">
+          <h4>2021、2024</h4>
+          <h5>跨越時差</h5>
+          <p>我們分隔在台灣與歐洲兩端，隔著半個地球，
+            時間與距離教會我們等待，<br>
+            也讓我們更確定彼此的存在。</p>
+        </div>
+      </div>
+      <div class="timeline-item left">
+        <div class="timeline-content">
+          <h4>2025</h4>
+          <h5>求婚</h5>
+          <p>我們一起去北海道，在富良野的花海裡，<br>
+            我們許下了一輩子的承諾。</p>
+        </div>
+      </div>
+      <div class="timeline-item right">
+        <div class="timeline-content">
+          <h4>2026</h4>
+          <h5>我們結婚了</h5>
+          <p>感謝有你，讓我們成為彼此的唯一。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Parallax Quote -->
+  <div class="parallax-quote fade-up">
+    <div class="parallax-overlay"></div>
+    <div class="quote-content">
+      <div class="quote-text">“Love is not found in words, it’s found in the steps we take together.”</div>
+    </div>
+  </div>
+
+    <!-- Moments Gallery -->
+    <section class="container moments-section fade-up">
+      <div class="section-title-center">Moments</div>
+  
+      <!-- 僅作用於 Moments，不影響其他區塊 -->
+      <style>
+        /* 桌機：兩張一排 */
+        .moments-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 24px;
+        }
+  
+        .moment-item {
+          overflow: hidden;
+          border-radius: 4px;
+        }
+  
+        /* 橫式照片友善比例 */
+        .moment-item img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          aspect-ratio: 3 / 2; /* 若想更寬可改成 16 / 9 */
+          transition: transform 0.8s ease;
+        }
+  
+        .moment-item:hover img {
+          transform: scale(1.08);
+        }
+  
+        /* 手機版：一張一排 */
+        @media (max-width: 768px) {
+          .moments-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      </style>
+  
+      <div class="moments-grid">
+        <div class="moment-item">
+          <img src="assets/img/DSC_1717.webp" alt="Moment 1">
+        </div>
+        <div class="moment-item">
+          <img src="assets/img/DSC_1812.webp" alt="Moment 2">
+        </div>
+        <div class="moment-item">
+          <img src="assets/img/DSC_1881.webp" alt="Moment 3">
+        </div>
+        <div class="moment-item">
+          <img src="assets/img/DSC_1749.webp" alt="Moment 4">
+        </div>
+      </div>
+    </section>  
+
+  <!-- Details / Calendar -->
+  <section class="container details-section fade-up">
+    <div class="double-happiness">囍</div>
+    <div class="date-large">2026 年 5 月 24 日 星期日</div>
+    <div class="lunar-date">農曆四月初八</div>
+    
+    <!-- [NEW] 加入行事曆按鈕 (Placed Here) -->
+    <div style="margin-top: 15px; margin-bottom: 25px;">
+        <a class="calendar-btn" onclick="downloadICS()">  
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          加入行事曆
+        </a>
+    </div>
+
+    <hr style="width: 50px; border: 1px solid var(--accent-color); margin: 30px auto;">
+
+    <div class="calendar-wrapper">
+      <div class="cal-header">
+        <div class="cal-month">05</div>
+        <div class="cal-year">/ 24 <span style="font-size: 0.8rem; color: var(--red-accent); margin-left: 10px;">2026</span></div>
+      </div>
+      <div class="cal-grid">
+        <div class="cal-head">Sun</div><div class="cal-head">Mon</div><div class="cal-head">Tue</div><div class="cal-head">Wed</div><div class="cal-head">Thu</div><div class="cal-head">Fri</div><div class="cal-head">Sat</div>
+        <div class="cal-day"></div><div class="cal-day"></div><div class="cal-day"></div><div class="cal-day"></div><div class="cal-day"></div><div class="cal-day">1</div><div class="cal-day">2</div>
+        <div class="cal-day">3</div><div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div><div class="cal-day">8</div><div class="cal-day">9</div>
+        <div class="cal-day">10</div><div class="cal-day">11</div><div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day">14</div><div class="cal-day">15</div><div class="cal-day">16</div>
+        <div class="cal-day">17</div><div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day">22</div><div class="cal-day">23</div>
+        <div class="cal-day heart"><span>24</span></div>
+        <div class="cal-day">25</div><div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div><div class="cal-day">30</div>
+        <div class="cal-day">31</div>
+      </div>
+    </div>
+
+    <div style="display:flex; justify-content:center; gap:40px; margin-top:40px;">
+       <div><div style="font-size:2rem; color:var(--red-accent);">🥂</div><div>11:30 AM</div><div style="font-size:0.9rem; color:#666;">迎賓酒會</div></div>
+       <div style="border-right:1px solid #ddd;"></div>
+       <div><div style="font-size:2rem; color:var(--red-accent);">🍴</div><div>12:00 PM</div><div style="font-size:0.9rem; color:#666;">幸福開席</div></div>
+    </div>
+  </section>
+
+  <!-- Map -->
+    <!-- 婚宴地點 -->
+    <div style="text-align:center; margin-bottom:40px;">
+      <h3 class="loc-title">
+        <span style="color:var(--red-accent); margin-right:8px;">📍</span>婚宴地點
+      </h3>
+      <p class="loc-name">晶宴會館-桃園館</p>
+      <p class="loc-detail">3F 恆劇場</p>
+      <p class="loc-addr">33076 桃園市桃園區南平路 166 號</p>
+    </div>
+  
+    <!-- Google Map -->
+    <div class="map-wrap" style="margin-bottom:30px;">
+      <iframe
+        title="map"
+        loading="lazy"
+        src="https://www.google.com/maps?q=晶宴會館-桃園館&output=embed">
+      </iframe>
+    </div>
+  
+    <!-- 交通方式（置中） -->
+    <div style="text-align:center; max-width:700px; margin:0 auto 40px auto;">
+      <h3 class="loc-title">
+        <span style="color:var(--red-accent); margin-right:8px;">🚉</span>交通方式
+      </h3>
+    </div>  
+
+    <!-- 新增照片 -->
+    <div style="max-width: 1400px; margin: 0 auto;">
+      <img
+        src="assets/img/commute.jpg"
+        alt="Venue Photo"
+        style="
+          width:100%;
+          border-radius:4px;
+          box-shadow:0 15px 30px rgba(0,0,0,0.08);
+        ">
+    </div>
+  </section>
+  
+
+  <!-- RSVP -->
+  <section class="container fade-up" id="rsvp" style="padding-bottom: 80px;">
+     <h2 class="text-center" style="margin-top: 20px; margin-bottom: 20px; color:var(--red-accent);">✨誠摯邀請</h2>
+     <!-- <p class="text-center" style="margin-bottom: 30px;">煩請於 2026/04/30 前回覆</p> -->
+     <div class="form-container">
+      <iframe 
+        id="rsvpForm"
+        src="https://docs.google.com/forms/d/e/1FAIpQLScWCIwZW7IWYH_JNmB_xrjLhef8xCqFZXv-QHmnH0jAgdablw/viewform?embedded=true"
+        height="2000"
+        style="width:100%; max-width:640px; margin:0 auto; display:block;"
+        frameborder="0">
+      </iframe>
+    </div>
+  </section>
+
+  <footer>
+    <p>崇華 & 舒婷 Wedding，誠摯邀請您的蒞臨 &copy; 2026</p>
+  </footer>
+
+  <!-- 自訂 LINE 提示彈窗 -->
+  <div id="line-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-title">⚠️ 無法直接下載</div>
+      <div class="modal-text">
+        LINE 瀏覽器不支援直接加入行事曆，請依照以下步驟操作：
+        <ul>
+          <li>點擊右下角 <strong>⋮</strong>圖示</li>
+          <li>選擇 <strong>以瀏覽器中開啟</strong> (或是 Safari / Chrome)</li>
+          <li>再次點擊加入行事曆即可！</li>
+        </ul>
+      </div>
+      <button class="modal-btn" onclick="closeLineModal()">我知道了</button>
+    </div>
+  </div>
+
+  <script>
+    const envelopeWrapper = document.querySelector('.modern-env');
+    const overlay = document.getElementById('envelope-overlay');
+    const audio = document.getElementById('bg-music');
+    const musicDisc = document.getElementById('music-toggle');
+    const scrollBtn = document.getElementById('scroll-toggle');
+    const hero = document.getElementById('hero');
+    
+    // Countdown
+    const targetDate = new Date("2026-05-24T12:00:00+08:00").getTime();
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      if (distance < 0) return;
+      document.getElementById("cd-days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+      document.getElementById("cd-hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      document.getElementById("cd-mins").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      document.getElementById("cd-secs").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Envelope Action
+    function openEnvelope() {
+      envelopeWrapper.classList.add('open');
+      playMusic();
+      setTimeout(() => {
+        overlay.classList.add('hidden'); 
+        hero.classList.add('active');
+        setTimeout(startAutoScroll, 2000);
+      }, 1500);
+    }
+
+    // Music
+    function playMusic() {
+      audio.volume = 0.6;
+      audio.play().then(() => {
+        musicDisc.classList.add('playing');
+        musicDisc.classList.remove('paused');
+      }).catch(e => console.log('Autoplay blocked', e));
+    }
+    function toggleMusic() {
+      if (audio.paused) {
+        audio.play();
+        musicDisc.classList.add('playing');
+        musicDisc.classList.remove('paused');
+      } else {
+        audio.pause();
+        musicDisc.classList.remove('playing');
+        musicDisc.classList.add('paused');
+      }
+    }
+
+    // Auto Scroll (Mobile-friendly, time-based)
+    let isAutoScrolling = false;
+    let scrollFrameId = null;
+    let lastTs = 0;
+    let scrollAccumulator = 0;
+
+    // 速度：每秒捲動幾 px（可自行調整，手機建議 30~60）
+    const SCROLL_SPEED_PX_PER_SEC = 45;
+
+    function getScrollMaxY() {
+      // 用 documentElement 比 body 穩定
+      const doc = document.documentElement;
+      return Math.max(0, doc.scrollHeight - window.innerHeight);
+    }
+
+    function autoScrollLoop(ts) {
+      if (!isAutoScrolling) return;
+
+      if (!lastTs) lastTs = ts;
+      const dt = (ts - lastTs) / 1000; // seconds
+      lastTs = ts;
+
+      // 累積「應該捲」的距離
+      scrollAccumulator += SCROLL_SPEED_PX_PER_SEC * dt;
+
+      // 一次至少捲 2px（手機較不容易被忽略）
+      let step = Math.floor(scrollAccumulator);
+      if (step >= 2) {
+        window.scrollBy(0, step);
+        scrollAccumulator -= step;
+      }
+
+      // 邊界：快到底就停
+      if (window.scrollY >= getScrollMaxY() - 2) {
+        stopAutoScroll();
+        return;
+      }
+
+      scrollFrameId = requestAnimationFrame(autoScrollLoop);
+    }
+
+    function startAutoScroll() {
+      if (isAutoScrolling) return;
+      document.documentElement.classList.add('autoscroll-off-smooth'); // ✅ 新增
+
+      isAutoScrolling = true;
+      scrollBtn.classList.add('active');
+
+      lastTs = 0;
+      scrollAccumulator = 0;
+
+      // ✅ 先「推一下」讓手機瀏覽器進入可捲狀態（很常有用）
+      window.scrollTo(0, window.scrollY + 2);
+
+      scrollFrameId = requestAnimationFrame(autoScrollLoop);
+    }
+
+    function stopAutoScroll() {
+      isAutoScrolling = false;
+      if (scrollFrameId) cancelAnimationFrame(scrollFrameId);
+      scrollFrameId = null;
+      scrollBtn.classList.remove('active');
+
+      document.documentElement.classList.remove('autoscroll-off-smooth');
+    }
+
+    function toggleAutoScrollManually() {
+      if (isAutoScrolling) stopAutoScroll();
+      else startAutoScroll();
+    }
+
+    // ✅ 只有「真的在捲動/拖曳」才停止 Auto Scroll
+    ['wheel', 'touchmove', 'mousedown'].forEach(evt => {
+      window.addEventListener(evt, (e) => {
+        // ✅ 點控制按鈕區不算使用者介入（避免點音樂/AutoScroll 按鈕就停）
+        if (e.target && e.target.closest && e.target.closest('.controls')) return;
+
+        if (isAutoScrolling) stopAutoScroll();
+      }, { passive: true });
+    });
+
+
+
+
+    // Fade Up
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // [NEW] Download ICS Function
+    // [NEW] 關閉彈窗
+    // [NEW] 關閉彈窗
+    function closeLineModal() {
+      // 修正點：這裡原本寫 line-alert-modal，要改成 line-modal
+      document.getElementById('line-modal').classList.remove('active');
+    }
+
+    // [MODIFIED] 修改後的下載函式
+    function downloadICS() {
+      // 1. 偵測是否為 LINE
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      const isLine = (userAgent.indexOf("Line") > -1);
+
+      // 2. 如果是 LINE，顯示自製彈窗
+      if (isLine) {
+        // 修正點：這裡原本寫 line-alert-modal，要改成 line-modal
+        document.getElementById('line-modal').classList.add('active');
+        return;
+      }
+
+      // 3. 如果不是 LINE，執行原本的下載邏輯
+      const eventTitle = "崇華 & 舒婷 Wedding";
+      const eventLocation = "晶宴會館-桃園館";
+      const eventDetails = "誠摯邀請您參加 崇華 & 舒婷 的婚禮。";
+      const startDate = "20260524T120000"; 
+      const endDate = "20260524T150000";
+
+      const event = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'BEGIN:VEVENT',
+        'DTSTART;TZID=Asia/Taipei:' + startDate,
+        'DTEND;TZID=Asia/Taipei:' + endDate,
+        'SUMMARY:' + eventTitle,
+        'LOCATION:' + eventLocation,
+        'DESCRIPTION:' + eventDetails,
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\n');
+
+      const blob = new Blob([event], { type: 'text/calendar;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'wedding-invite.ics';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+    // ===== RSVP Auto Scroll After Submit =====
+    const rsvpIframe = document.getElementById("rsvpForm");
+    let rsvpLoadCount = 0;
+
+    if (rsvpIframe) {
+      rsvpIframe.addEventListener("load", function () {
+        rsvpLoadCount++;
+
+        // 第一次 load 是表單初始化，不動
+        if (rsvpLoadCount > 1) {
+          document.getElementById("rsvp").scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>
