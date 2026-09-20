@@ -1189,6 +1189,22 @@
     .modal-btn:hover {
       background: #8e7c65;
     }
+
+    /* Hero 手機版 */
+    @media (max-width: 768px) {
+      .hero-content {
+        width: 100%;
+        padding: 0 20px;
+        position: relative;
+        top: 140px;
+      }
+
+      .hero-title,
+      .hero-subtitle,
+      .hero-date-line {
+        transform: none;
+      }
+    }
   </style>
 </head>
 
@@ -1234,7 +1250,7 @@
     <div class="hero-bg"></div>
     <div class="hero-content">
       <h1 class="hero-title">舒維 & 于昕</h1>
-      <div class="hero-subtitle"></div>
+      <div class="hero-subtitle">Our Wedding</div>
       <div class="hero-date-line">DECEMBER 12, 2026</div>
     </div>
   </header>
@@ -1394,7 +1410,7 @@
       }
 
       /* 手機版：一張一排 */
-      @media (max-width: 768px) {
+      /* @media (max-width: 768px) {
         .moments-grid {
           grid-template-columns: 1fr;
         }
@@ -1411,7 +1427,7 @@
         .hero-date-line {
           transform: none;
         }
-      }
+      } */
     </style>
 
     <div class="moments-grid">
