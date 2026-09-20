@@ -1193,15 +1193,33 @@
     /* Hero 手機版 */
     @media (max-width: 768px) {
       .hero-content {
-        width: 100%;
-        padding: 0 20px;
-        position: relative;
-        top: 140px;
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        bottom: 8vh;
+        width: auto;
+        padding: 0;
       }
 
-      .hero-title,
-      .hero-subtitle,
+      .hero-title {
+        font-size: clamp(2.2rem, 10vw, 3rem);
+        line-height: 1.1;
+        margin-bottom: 10px;
+        transform: none;
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1.4rem, 7vw, 1.8rem);
+        letter-spacing: 0.12em;
+        margin: 4px 0 8px;
+        transform: none;
+      }
+
       .hero-date-line {
+        font-size: clamp(0.75rem, 3.5vw, 0.9rem);
+        letter-spacing: 0.18em;
+        padding-top: 7px;
+        margin-top: 6px;
         transform: none;
       }
     }
